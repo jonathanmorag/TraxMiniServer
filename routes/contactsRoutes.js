@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const contactsController = require("../controllers/contactsController");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router
+  .route("/")
+  .get(contactsController.getAllContacts)
+  .post(contactsController.addContact);
+
+// router.route("/:name").get(contactsController.getContactByName);
 
 module.exports = router;

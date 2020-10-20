@@ -4,8 +4,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const PORT = 3000;
 
-const homeRouter = require("./routes/home");
-const contactsRouter = require("./routes/contacts");
+const homeRouter = require("./routes/homeRoutes");
+const contactsRouter = require("./routes/contactsRoutes");
 
 app.get("/", (req, res) => {
   res.send("Welcome to Home Page");

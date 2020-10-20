@@ -18,10 +18,9 @@ app.get("/", (req, res) => {
 app.use("/whos-there", homeRouter);
 app.use("/contacts", contactsRouter);
 
-// app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(PORT, () => console.log(`Server is listeting at port ${PORT}...`));
+app.listen(PORT, () => console.log(`Server is listening at port ${PORT}...`));
 
 module.exports = app;

@@ -7,6 +7,6 @@ router
   .get(contactsController.getAllContacts)
   .post(contactsController.addContact);
 
-// router.route("/:name").get(contactsController.getContactByName);
+router.route("/:name").get(contactsController.getContactByName);
 
 module.exports = router;

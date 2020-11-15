@@ -1,17 +1,17 @@
 const Contact = require("../models/Contact");
 
 // Init an empty array. In real world we use DBs for storage
-const contacts = [];
+const contacts = [new Contact("Jon", "12345")];
 
 // Get All Contacts
 exports.getAllContacts = async (req, res) => {
   try {
-    res.json({
+    res.status(200).json({
       message: "success",
       contacts,
     });
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
 
@@ -20,12 +20,12 @@ exports.addContact = async (req, res) => {
   try {
     const contact = new Contact(req.body.name, req.body.phoneNumber);
     contacts.push(contact);
-    res.json({
+    res.status(201).json({
       message: "success",
       contact,
     });
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
 
@@ -33,11 +33,14 @@ exports.addContact = async (req, res) => {
 exports.getContactByName = async (req, res) => {
   try {
     const filteredContacts = contacts.filter((c) => c.name === req.params.name);
-    res.json({
+    if (filteredContacts.length === 0) {
+      res.status(404).json({ message: "No contact matched the query" });
+    }
+    res.status(200).json({
       message: "success",
       contacts: filteredContacts,
     });
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };

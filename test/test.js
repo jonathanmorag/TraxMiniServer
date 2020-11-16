@@ -80,6 +80,22 @@ describe("Contacts API", () => {
     });
   });
 
+  describe("GET /contacts/:name", () => {
+    it("It should NOT get a one or more contacts by name", (done) => {
+      const c = new Contact("Eddie", "12345");
+      chai
+        .request(server)
+        .get(`/contacts/${c.name}`)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.be.a("object");
+          res.body.should.not.have.property("contacts");
+          res.body.message.should.be.eq("No contact matched the query");
+        });
+      done();
+    });
+  });
+
   /**
    * Test the POST route
    */
